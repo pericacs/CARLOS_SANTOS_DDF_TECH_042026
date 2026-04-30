@@ -56,10 +56,10 @@ As evidências devem comprovar que os dados foram carregados, catalogados, valid
 
 | Evidência | Status | Caminho |
 |---|---|---|
-| Script de Great Expectations executado | Pendente | `data_quality/great_expectations_olist.py` |
-| Relatório Markdown gerado | Pendente | `data_quality/reports/relatorio_data_quality_olist.md` |
-| Resultado JSON gerado | Pendente | `data_quality/reports/resultado_data_quality_olist.json` |
-| Regras de qualidade documentadas | Pendente | `README.md` e `data/dicionario_dados_olist.md` |
+| Script de Great Expectations executado | Concluído  | `data_quality/great_expectations_olist.py` |
+| Relatório Markdown gerado | Concluído  | `data_quality/reports/relatorio_data_quality_olist.md` |
+| Resultado JSON gerado | Concluído  | `data_quality/reports/resultado_data_quality_olist.json` |
+| Regras de qualidade documentadas | Concluído  | `README.md` e `data/dicionario_dados_olist.md` |
 | Prints do relatório salvos | Pendente | `evidencias/data_quality/` |
 
 Sugestões de prints:
@@ -184,8 +184,8 @@ Antes de enviar o case, validar:
 - [ ] Link do vídeo incluído no README
 - [ ] Links da Dadosfera incluídos no README
 - [ ] Prints salvos na pasta `evidencias/`
-- [ ] Data Quality executado
-- [ ] Relatório de Data Quality versionado
+- [X] Data Quality executado
+- [X] Relatório de Data Quality versionado
 - [ ] SQLs da modelagem versionados
 - [ ] Data App versionado
 - [ ] Dashboard criado com pelo menos 5 visualizações

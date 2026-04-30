@@ -290,6 +290,28 @@ O objetivo é validar regras como:
 | customers | customer_state | Não pode ser nulo |
 | products | product_category_name | Pode ser nulo, mas deve ser monitorado |
 
+### 8.2 Resultado da Execução
+
+As validações de Data Quality foram executadas com sucesso utilizando Great Expectations.
+
+Resumo da execução:
+
+| Tabela | Sucesso | Expectativas Avaliadas | Expectativas com Sucesso | Expectativas com Falha | % Sucesso |
+|---|---|---:|---:|---:|---:|
+| orders | True | 7 | 7 | 0 | 100.0% |
+| order_items | True | 9 | 9 | 0 | 100.0% |
+| customers | True | 6 | 6 | 0 | 100.0% |
+| products | True | 6 | 6 | 0 | 100.0% |
+| payments | True | 7 | 7 | 0 | 100.0% |
+| reviews | True | 5 | 5 | 0 | 100.0% |
+| sellers | True | 4 | 4 | 0 | 100.0% |
+
+Relatórios gerados:
+
+```text
+data_quality/reports/relatorio_data_quality_olist.md
+data_quality/reports/resultado_data_quality_olist.json
+```
 ---
 
 ## 9. Uso de GenAI / LLM
