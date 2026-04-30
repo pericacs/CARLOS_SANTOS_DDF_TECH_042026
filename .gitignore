@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dados locais grandes
+data/raw/
+data/processed/
+*.csv
+*.parquet
+*.zip
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
