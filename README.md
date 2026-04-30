@@ -257,7 +257,7 @@ Arquivo:
 
 ```text
 data/dicionario_dados_olist.md
-
+```
 ---
 
 ## 8. Data Quality

@@ -17,6 +17,9 @@ A camada Gold representa os dados organizados em modelo dimensional, seguindo os
 | `dim_vendedor.sql` | `gold.dim_vendedor` | Dimensão de vendedores |
 | `dim_tempo.sql` | `gold.dim_tempo` | Dimensão calendário |
 | `fato_pedidos.sql` | `gold.fato_pedidos` | Fato principal de pedidos, vendas e entregas |
+| `fato_pagamentos.sql` | `gold.fato_pagamentos` | Fato de pagamentos dos pedidos |
+| `fato_reviews.sql` | `gold.fato_reviews` | Fato de avaliações e satisfação dos clientes |
+| `vw_ecommerce_performance_comercial.sql` | `gold.vw_ecommerce_performance_comercial` | Visão consolidada para dashboard comercial |
 
 ---
 
@@ -30,3 +33,23 @@ dim_tempo ---- fato_pedidos ---- dim_produto
                      |
                      |
                 dim_vendedor
+
+```
+---
+
+## Visões Analíticas
+
+### `gold.vw_ecommerce_performance_comercial`
+
+Esta view consolida informações de pedidos, clientes, produtos, vendedores e tempo.
+
+Ela será utilizada para criação de indicadores como:
+
+- faturamento por mês;
+- pedidos por estado;
+- faturamento por categoria;
+- ticket médio;
+- percentual de entregas atrasadas;
+- média de dias até entrega;
+- performance por vendedor;
+- performance por categoria.                
