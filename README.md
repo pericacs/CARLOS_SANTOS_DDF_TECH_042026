@@ -517,6 +517,12 @@ Nome sugerido da coleção:
 Carlos Santos - 04_2026
 ```
 
+O planejamento detalhado do dashboard está disponível em:
+
+```text
+apresentacao/planejamento_dashboard.md
+```
+
 ### 12.1 Visualizações Propostas
 
 | Nº | Pergunta de Negócio | Tipo de Visualização |
