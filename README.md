@@ -249,6 +249,17 @@ Exemplos:
 
 ---
 
+## 7.3 Dicionário de Dados
+
+O dicionário de dados da base Olist foi criado para documentar tabelas, colunas, chaves, relacionamentos, regras de negócio e uso analítico dos datasets.
+
+Arquivo:
+
+```text
+data/dicionario_dados_olist.md
+
+---
+
 ## 8. Data Quality
 
 A etapa de Data Quality será implementada com Great Expectations.
