@@ -570,6 +570,12 @@ pipeline_ecommerce_olist_kimball
 
 Será criado um Data App em Streamlit para exploração interativa dos dados.
 
+O código do Data App está disponível em:
+
+```text
+streamlit_app/app.py
+```
+
 ### 14.1 Funcionalidades
 
 O Data App permitirá:
