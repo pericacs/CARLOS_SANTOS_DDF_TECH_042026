@@ -20,6 +20,7 @@ A camada Gold representa os dados organizados em modelo dimensional, seguindo os
 | `fato_pagamentos.sql` | `gold.fato_pagamentos` | Fato de pagamentos dos pedidos |
 | `fato_reviews.sql` | `gold.fato_reviews` | Fato de avaliações e satisfação dos clientes |
 | `vw_ecommerce_performance_comercial.sql` | `gold.vw_ecommerce_performance_comercial` | Visão consolidada para dashboard comercial |
+| `vw_ecommerce_experiencia_cliente.sql` | `gold.vw_ecommerce_experiencia_cliente` | Visão consolidada para análise de satisfação, reviews e atrasos |
 
 ---
 
@@ -53,3 +54,19 @@ Ela será utilizada para criação de indicadores como:
 - média de dias até entrega;
 - performance por vendedor;
 - performance por categoria.                
+
+---
+
+### `gold.vw_ecommerce_experiencia_cliente`
+
+Esta view consolida dados de reviews, pedidos, entregas, clientes, produtos e vendedores.
+
+Ela será utilizada para análises como:
+
+- score médio de avaliação;
+- percentual de reviews negativos;
+- reviews por categoria de produto;
+- relação entre atraso e avaliação;
+- risco de insatisfação do cliente;
+- comentários de clientes para uso com IA;
+- categorias com maior impacto negativo na experiência do cliente.
