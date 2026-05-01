@@ -1,0 +1,17 @@
+-- ============================================================
+-- Tabela: PUBLIC.BRONZE_PAYMENTS
+-- Camada: Bronze
+-- Origem: PUBLIC.RAW_PAYMENTS
+-- Objetivo: Padronizar dados de pagamento dos pedidos
+-- ============================================================
+
+CREATE OR REPLACE TABLE PUBLIC.BRONZE_PAYMENTS AS
+SELECT
+    ORDER_ID::VARCHAR AS ORDER_ID,
+    TRY_TO_NUMBER(PAYMENT_SEQUENTIAL) AS PAYMENT_SEQUENTIAL,
+    LOWER(TRIM(PAYMENT_TYPE)) AS PAYMENT_TYPE,
+    TRY_TO_NUMBER(PAYMENT_INSTALLMENTS) AS PAYMENT_INSTALLMENTS,
+    TRY_TO_DECIMAL(PAYMENT_VALUE, 18, 2) AS PAYMENT_VALUE,
+
+    CURRENT_TIMESTAMP() AS BRONZE_CREATED_AT
+FROM PUBLIC.RAW_PAYMENTS;

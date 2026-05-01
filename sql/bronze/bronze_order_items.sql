@@ -1,0 +1,21 @@
+-- ============================================================
+-- Tabela: PUBLIC.BRONZE_ORDER_ITEMS
+-- Camada: Bronze
+-- Origem: PUBLIC.RAW_ORDER_ITEMS
+-- Objetivo: Padronizar tipos e nomes da tabela de itens dos pedidos
+-- ============================================================
+
+CREATE OR REPLACE TABLE PUBLIC.BRONZE_ORDER_ITEMS AS
+SELECT
+    ORDER_ID::VARCHAR AS ORDER_ID,
+    TRY_TO_NUMBER(ORDER_ITEM_ID) AS ORDER_ITEM_ID,
+    PRODUCT_ID::VARCHAR AS PRODUCT_ID,
+    SELLER_ID::VARCHAR AS SELLER_ID,
+
+    TRY_TO_TIMESTAMP_NTZ(SHIPPING_LIMIT_DATE) AS SHIPPING_LIMIT_DATE,
+
+    TRY_TO_DECIMAL(PRICE, 18, 2) AS PRICE,
+    TRY_TO_DECIMAL(FREIGHT_VALUE, 18, 2) AS FREIGHT_VALUE,
+
+    CURRENT_TIMESTAMP() AS BRONZE_CREATED_AT
+FROM PUBLIC.RAW_ORDER_ITEMS;

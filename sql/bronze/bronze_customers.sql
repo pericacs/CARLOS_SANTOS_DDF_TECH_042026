@@ -1,0 +1,17 @@
+-- ============================================================
+-- Tabela: PUBLIC.BRONZE_CUSTOMERS
+-- Camada: Bronze
+-- Origem: PUBLIC.RAW_CUSTOMERS
+-- Objetivo: Padronizar dados cadastrais e geográficos dos clientes
+-- ============================================================
+
+CREATE OR REPLACE TABLE PUBLIC.BRONZE_CUSTOMERS AS
+SELECT
+    CUSTOMER_ID::VARCHAR AS CUSTOMER_ID,
+    CUSTOMER_UNIQUE_ID::VARCHAR AS CUSTOMER_UNIQUE_ID,
+    TRY_TO_NUMBER(CUSTOMER_ZIP_CODE_PREFIX) AS CUSTOMER_ZIP_CODE_PREFIX,
+    LOWER(TRIM(CUSTOMER_CITY)) AS CUSTOMER_CITY,
+    UPPER(TRIM(CUSTOMER_STATE)) AS CUSTOMER_STATE,
+
+    CURRENT_TIMESTAMP() AS BRONZE_CREATED_AT
+FROM PUBLIC.RAW_CUSTOMERS;
