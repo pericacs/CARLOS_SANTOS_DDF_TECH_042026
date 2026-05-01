@@ -698,13 +698,17 @@ Esta seção será preenchida após a criação dos ativos na Dadosfera.
 
 ### 16.1 Datasets
 
-| Ativo | Link Dadosfera | Print |
-|------|----------------|-------|
-| Raw Orders | Pendente | Pendente |
-| Raw Customers | Pendente | Pendente |
-| Raw Products | Pendente | Pendente |
-| Gold Fato Pedidos | Pendente | Pendente |
-| Gold Fato Reviews | Pendente | Pendente |
+Os arquivos da base Olist foram carregados na Dadosfera na camada Raw, utilizando o schema `PUBLIC` e o prefixo `RAW_` para representar a zona de dados brutos.
+
+| Ativo | Tabela na Dadosfera | Status | Evidência |
+|------|----------------------|--------|-----------|
+| Orders | `PUBLIC.RAW_ORDERS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_orders.png` |
+| Order Items | `PUBLIC.RAW_ORDER_ITEMS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_order_items.png` |
+| Customers | `PUBLIC.RAW_CUSTOMERS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_customers.png` |
+| Products | `PUBLIC.RAW_PRODUCTS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_products.png` |
+| Payments | `PUBLIC.RAW_PAYMENTS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_payments.png` |
+| Reviews | `PUBLIC.RAW_REVIEWS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_reviews.png` |
+| Sellers | `PUBLIC.RAW_SELLERS` | Concluído | `evidencias/dadosfera/catalogo/catalogo_raw_sellers.png` |
 
 ---
 

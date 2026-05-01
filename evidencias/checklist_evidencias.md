@@ -75,17 +75,17 @@ evidencias/data_quality/validacoes_great_expectations.png
 
 | Evidência | Status | Link / Caminho |
 |---|---|---|
-| Dataset `orders` carregado | Concluído | Link Dadosfera |
-| Dataset `order_items` carregado | Concluído | Link Dadosfera |
-| Dataset `customers` carregado | Concluído | Link Dadosfera |
-| Dataset `products` carregado | Concluído | Link Dadosfera |
-| Dataset `payments` carregado | Concluído | Link Dadosfera |
-| Dataset `reviews` carregado | Concluído | Link Dadosfera |
-| Dataset `sellers` carregado | Concluído | Link Dadosfera |
-| Dataset `geolocation` carregado | Concluído | Link Dadosfera |
-| Dataset `category_translation` carregado | Concluído | Link Dadosfera |
-| Datasets organizados em zona/camada | Concluído | Link Dadosfera |
-| Datasets catalogados | Concluído | Link Dadosfera |
+| Dataset `orders` carregado | Concluído | `PUBLIC.RAW_ORDERS` |
+| Dataset `order_items` carregado | Concluído | `PUBLIC.RAW_ORDER_ITEMS` |
+| Dataset `customers` carregado | Concluído | `PUBLIC.RAW_CUSTOMERS` |
+| Dataset `products` carregado | Concluído | `PUBLIC.RAW_PRODUCTS` |
+| Dataset `payments` carregado | Concluído | `PUBLIC.RAW_PAYMENTS` |
+| Dataset `reviews` carregado | Concluído | `PUBLIC.RAW_REVIEWS` |
+| Dataset `sellers` carregado | Concluído | `PUBLIC.RAW_SELLERS` |
+| Dataset `geolocation` carregado | Concluído | `PUBLIC.RAW_GEOLOCATION` |
+| Dataset `category_translation` carregado | Concluído | `PUBLIC.RAW_CATEGORY_TRANSLATION` |
+| Datasets organizados em zona/camada | Concluído | Prefixo `RAW_` no schema `PUBLIC` |
+| Datasets catalogados | Concluído | Descrições preenchidas no Catálogo da Dadosfera |
 
 Sugestões de prints:
 
