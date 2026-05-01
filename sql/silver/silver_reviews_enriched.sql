@@ -1,0 +1,83 @@
+-- ============================================================
+-- Tabela: PUBLIC.SILVER_REVIEWS_ENRICHED
+-- Camada: Silver
+-- Origem: PUBLIC.BRONZE_REVIEWS
+-- Objetivo: Classificar avaliações, sentimento e risco de insatisfação
+-- ============================================================
+
+CREATE OR REPLACE TABLE PUBLIC.SILVER_REVIEWS_ENRICHED AS
+SELECT
+    REVIEW_ID,
+    ORDER_ID,
+    REVIEW_SCORE,
+    REVIEW_COMMENT_TITLE,
+    REVIEW_COMMENT_MESSAGE,
+    REVIEW_CREATION_DATE,
+    REVIEW_ANSWER_TIMESTAMP,
+
+    CAST(REVIEW_CREATION_DATE AS DATE) AS REVIEW_CREATION_DATE_ONLY,
+    CAST(REVIEW_ANSWER_TIMESTAMP AS DATE) AS REVIEW_ANSWER_DATE_ONLY,
+
+    CASE
+        WHEN REVIEW_SCORE <= 2 THEN 'Negativo'
+        WHEN REVIEW_SCORE = 3 THEN 'Neutro'
+        WHEN REVIEW_SCORE >= 4 THEN 'Positivo'
+        ELSE 'Não classificado'
+    END AS REVIEW_CLASSIFICATION,
+
+    CASE
+        WHEN REVIEW_SCORE <= 2 THEN 1
+        ELSE 0
+    END AS IS_NEGATIVE_REVIEW,
+
+    CASE
+        WHEN REVIEW_SCORE >= 4 THEN 1
+        ELSE 0
+    END AS IS_POSITIVE_REVIEW,
+
+    CASE
+        WHEN REVIEW_COMMENT_MESSAGE IS NOT NULL
+             AND LENGTH(TRIM(REVIEW_COMMENT_MESSAGE)) > 0
+        THEN 1
+        ELSE 0
+    END AS HAS_REVIEW_COMMENT,
+
+    CASE
+        WHEN REVIEW_SCORE <= 2
+             AND REVIEW_COMMENT_MESSAGE IS NOT NULL
+        THEN 'Alto'
+        WHEN REVIEW_SCORE = 3
+             AND REVIEW_COMMENT_MESSAGE IS NOT NULL
+        THEN 'Médio'
+        WHEN REVIEW_SCORE >= 4
+        THEN 'Baixo'
+        ELSE 'Não avaliado'
+    END AS DISSATISFACTION_RISK,
+
+    CASE
+        WHEN REVIEW_COMMENT_MESSAGE IS NULL
+             OR LENGTH(TRIM(REVIEW_COMMENT_MESSAGE)) = 0
+        THEN 'Sem comentário'
+        WHEN LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%atras%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%demor%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%entrega%'
+        THEN 'Entrega'
+        WHEN LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%defeito%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%quebrad%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%danific%'
+        THEN 'Produto com problema'
+        WHEN LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%não recebi%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%nao recebi%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%nunca chegou%'
+        THEN 'Não recebimento'
+        WHEN LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%bom%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%ótimo%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%otimo%'
+          OR LOWER(REVIEW_COMMENT_MESSAGE) LIKE '%excelente%'
+        THEN 'Elogio'
+        ELSE 'Outros'
+    END AS REVIEW_TOPIC,
+
+    CURRENT_TIMESTAMP() AS SILVER_CREATED_AT
+
+FROM PUBLIC.BRONZE_REVIEWS;
