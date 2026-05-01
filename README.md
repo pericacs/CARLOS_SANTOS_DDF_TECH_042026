@@ -586,6 +586,28 @@ Nome sugerido:
 pipeline_ecommerce_olist_kimball
 ```
 
+### 13.3 Ordem de Execução dos Scripts SQL
+
+A ordem de execução dos scripts SQL do projeto está documentada em:
+
+```text
+sql/ordem_execucao_sql.md
+```
+
+O fluxo respeita a arquitetura em camadas:
+
+```text
+PUBLIC.RAW_*
+    ↓
+PUBLIC.BRONZE_*
+    ↓
+PUBLIC.SILVER_*_ENRICHED
+    ↓
+PUBLIC.GOLD_*
+```
+
+Essa documentação define a sequência correta para criação das tabelas Bronze, Silver, dimensões Gold, fatos Gold e views analíticas.
+
 ---
 
 ## 14. Data App com Streamlit
