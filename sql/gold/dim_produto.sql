@@ -1,24 +1,34 @@
 -- ============================================================
--- Tabela: dim_produto
+-- Tabela: PUBLIC.GOLD_DIM_PRODUTO
 -- Camada: Gold
--- Objetivo: Dimensão de produtos enriquecida com categoria traduzida
--- Origem: products + category_translation
+-- Objetivo: Dimensão de produtos para análise de categorias e características
+-- Origem: PUBLIC.SILVER_ORDER_ITEMS_ENRICHED
 -- ============================================================
 
-CREATE OR REPLACE TABLE gold.dim_produto AS
+CREATE OR REPLACE TABLE PUBLIC.GOLD_DIM_PRODUTO AS
 SELECT
-    ROW_NUMBER() OVER (ORDER BY p.product_id) AS sk_produto,
-    p.product_id,
-    p.product_category_name,
-    COALESCE(t.product_category_name_english, p.product_category_name) AS product_category_name_english,
-    p.product_name_lenght,
-    p.product_description_lenght,
-    p.product_photos_qty,
-    p.product_weight_g,
-    p.product_length_cm,
-    p.product_height_cm,
-    p.product_width_cm
-FROM silver.products p
-LEFT JOIN silver.category_translation t
-    ON p.product_category_name = t.product_category_name
-WHERE p.product_id IS NOT NULL;
+    ROW_NUMBER() OVER (ORDER BY PRODUCT_ID) AS SK_PRODUTO,
+    PRODUCT_ID,
+    PRODUCT_CATEGORY_NAME,
+    PRODUCT_NAME_LENGHT,
+    PRODUCT_DESCRIPTION_LENGHT,
+    PRODUCT_PHOTOS_QTY,
+    PRODUCT_WEIGHT_G,
+    PRODUCT_LENGTH_CM,
+    PRODUCT_HEIGHT_CM,
+    PRODUCT_WIDTH_CM,
+    CURRENT_TIMESTAMP() AS GOLD_CREATED_AT
+FROM (
+    SELECT DISTINCT
+        PRODUCT_ID,
+        PRODUCT_CATEGORY_NAME,
+        PRODUCT_NAME_LENGHT,
+        PRODUCT_DESCRIPTION_LENGHT,
+        PRODUCT_PHOTOS_QTY,
+        PRODUCT_WEIGHT_G,
+        PRODUCT_LENGTH_CM,
+        PRODUCT_HEIGHT_CM,
+        PRODUCT_WIDTH_CM
+    FROM PUBLIC.SILVER_ORDER_ITEMS_ENRICHED
+    WHERE PRODUCT_ID IS NOT NULL
+);

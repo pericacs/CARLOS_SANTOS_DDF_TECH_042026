@@ -1,66 +1,65 @@
 -- ============================================================
--- View: vw_ecommerce_performance_comercial
+-- View: PUBLIC.GOLD_VW_ECOMMERCE_PERFORMANCE_COMERCIAL
 -- Camada: Gold
 -- Objetivo: Visão consolidada para dashboard comercial
--- Origem: fato_pedidos + dimensões
+-- Origem: PUBLIC.GOLD_FATO_PEDIDOS + dimensões
 -- ============================================================
 
-CREATE OR REPLACE VIEW gold.vw_ecommerce_performance_comercial AS
+CREATE OR REPLACE VIEW PUBLIC.GOLD_VW_ECOMMERCE_PERFORMANCE_COMERCIAL AS
 SELECT
-    ft.data AS data_compra,
-    ft.ano,
-    ft.mes,
-    ft.trimestre,
+    dt.DATA AS DATA_COMPRA,
+    dt.ANO,
+    dt.MES,
+    dt.TRIMESTRE,
 
-    dc.customer_state AS estado_cliente,
-    dc.customer_city AS cidade_cliente,
+    dc.CUSTOMER_STATE AS ESTADO_CLIENTE,
+    dc.CUSTOMER_CITY AS CIDADE_CLIENTE,
 
-    dp.product_category_name,
-    dp.product_category_name_english,
+    dp.PRODUCT_CATEGORY_NAME,
 
-    dv.seller_state AS estado_vendedor,
-    dv.seller_city AS cidade_vendedor,
+    dv.SELLER_STATE AS ESTADO_VENDEDOR,
+    dv.SELLER_CITY AS CIDADE_VENDEDOR,
 
-    fp.order_status,
+    fp.ORDER_STATUS,
+    fp.DELIVERY_STATUS,
 
-    COUNT(DISTINCT fp.order_id) AS total_pedidos,
-    SUM(fp.quantidade_itens) AS total_itens,
-    SUM(fp.valor_produtos) AS faturamento_produtos,
-    SUM(fp.valor_frete) AS valor_total_frete,
-    SUM(fp.valor_total_pedido) AS faturamento_total,
+    COUNT(DISTINCT fp.ORDER_ID) AS TOTAL_PEDIDOS,
+    SUM(fp.QUANTIDADE_ITENS) AS TOTAL_ITENS,
+    SUM(fp.VALOR_PRODUTOS) AS FATURAMENTO_PRODUTOS,
+    SUM(fp.VALOR_FRETE) AS VALOR_TOTAL_FRETE,
+    SUM(fp.VALOR_TOTAL_PEDIDO) AS FATURAMENTO_TOTAL,
 
-    AVG(fp.valor_total_pedido) AS ticket_medio,
-    AVG(fp.dias_ate_entrega) AS media_dias_entrega,
-    AVG(fp.dias_atraso) AS media_dias_atraso,
+    AVG(fp.VALOR_TOTAL_PEDIDO) AS TICKET_MEDIO,
+    AVG(fp.DIAS_ATE_ENTREGA) AS MEDIA_DIAS_ENTREGA,
+    AVG(fp.DIAS_ATRASO) AS MEDIA_DIAS_ATRASO,
 
-    SUM(fp.flag_entrega_atrasada) AS total_entregas_atrasadas,
+    SUM(fp.FLAG_ENTREGA_ATRASADA) AS TOTAL_ENTREGAS_ATRASADAS,
 
-    CAST(SUM(fp.flag_entrega_atrasada) AS DOUBLE)
-        / NULLIF(COUNT(DISTINCT fp.order_id), 0) AS percentual_entregas_atrasadas
+    SUM(fp.FLAG_ENTREGA_ATRASADA) / NULLIF(COUNT(DISTINCT fp.ORDER_ID), 0) AS PERCENTUAL_ENTREGAS_ATRASADAS
 
-FROM gold.fato_pedidos fp
+FROM PUBLIC.GOLD_FATO_PEDIDOS fp
 
-LEFT JOIN gold.dim_tempo ft
-    ON fp.sk_tempo_compra = ft.sk_tempo
+LEFT JOIN PUBLIC.GOLD_DIM_TEMPO dt
+    ON fp.SK_TEMPO_COMPRA = dt.SK_TEMPO
 
-LEFT JOIN gold.dim_cliente dc
-    ON fp.sk_cliente = dc.sk_cliente
+LEFT JOIN PUBLIC.GOLD_DIM_CLIENTE dc
+    ON fp.SK_CLIENTE = dc.SK_CLIENTE
 
-LEFT JOIN gold.dim_produto dp
-    ON fp.sk_produto = dp.sk_produto
+LEFT JOIN PUBLIC.GOLD_DIM_PRODUTO dp
+    ON fp.SK_PRODUTO = dp.SK_PRODUTO
 
-LEFT JOIN gold.dim_vendedor dv
-    ON fp.sk_vendedor = dv.sk_vendedor
+LEFT JOIN PUBLIC.GOLD_DIM_VENDEDOR dv
+    ON fp.SK_VENDEDOR = dv.SK_VENDEDOR
 
 GROUP BY
-    ft.data,
-    ft.ano,
-    ft.mes,
-    ft.trimestre,
-    dc.customer_state,
-    dc.customer_city,
-    dp.product_category_name,
-    dp.product_category_name_english,
-    dv.seller_state,
-    dv.seller_city,
-    fp.order_status;
+    dt.DATA,
+    dt.ANO,
+    dt.MES,
+    dt.TRIMESTRE,
+    dc.CUSTOMER_STATE,
+    dc.CUSTOMER_CITY,
+    dp.PRODUCT_CATEGORY_NAME,
+    dv.SELLER_STATE,
+    dv.SELLER_CITY,
+    fp.ORDER_STATUS,
+    fp.DELIVERY_STATUS;

@@ -1,68 +1,43 @@
 -- ============================================================
--- Tabela: fato_reviews
+-- Tabela: PUBLIC.GOLD_FATO_REVIEWS
 -- Camada: Gold
 -- Objetivo: Fato de avaliações dos clientes
--- Origem: reviews + orders + dim_cliente + dim_tempo
+-- Origem: PUBLIC.SILVER_REVIEWS_ENRICHED + PUBLIC.SILVER_ORDERS_ENRICHED
 -- ============================================================
 
-CREATE OR REPLACE TABLE gold.fato_reviews AS
+CREATE OR REPLACE TABLE PUBLIC.GOLD_FATO_REVIEWS AS
 SELECT
-    r.review_id,
-    r.order_id,
-    dc.sk_cliente,
-    dt.sk_tempo AS sk_tempo_review,
+    r.REVIEW_ID,
+    r.ORDER_ID,
 
-    r.review_score,
-    r.review_comment_title,
-    r.review_comment_message,
-    CAST(r.review_creation_date AS DATE) AS data_criacao_review,
-    CAST(r.review_answer_timestamp AS DATE) AS data_resposta_review,
+    dc.SK_CLIENTE,
+    dt.SK_TEMPO AS SK_TEMPO_REVIEW,
 
-    CASE
-        WHEN r.review_score <= 2 THEN 'Negativo'
-        WHEN r.review_score = 3 THEN 'Neutro'
-        WHEN r.review_score >= 4 THEN 'Positivo'
-        ELSE 'Não Classificado'
-    END AS classificacao_review,
+    r.REVIEW_SCORE,
+    r.REVIEW_CLASSIFICATION,
+    r.IS_NEGATIVE_REVIEW,
+    r.IS_POSITIVE_REVIEW,
+    r.HAS_REVIEW_COMMENT,
+    r.DISSATISFACTION_RISK,
+    r.REVIEW_TOPIC,
 
-    CASE
-        WHEN r.review_score <= 2 THEN 1
-        ELSE 0
-    END AS flag_review_negativo,
+    r.REVIEW_COMMENT_TITLE,
+    r.REVIEW_COMMENT_MESSAGE,
 
-    CASE
-        WHEN r.review_score >= 4 THEN 1
-        ELSE 0
-    END AS flag_review_positivo,
+    r.REVIEW_CREATION_DATE_ONLY AS DATA_CRIACAO_REVIEW,
+    r.REVIEW_ANSWER_DATE_ONLY AS DATA_RESPOSTA_REVIEW,
 
-    CASE
-        WHEN r.review_comment_message IS NOT NULL
-             AND LENGTH(TRIM(r.review_comment_message)) > 0
-        THEN 1
-        ELSE 0
-    END AS flag_possui_comentario,
+    CURRENT_TIMESTAMP() AS GOLD_CREATED_AT
 
-    CASE
-        WHEN r.review_score <= 2
-             AND r.review_comment_message IS NOT NULL
-        THEN 'Alto'
-        WHEN r.review_score = 3
-             AND r.review_comment_message IS NOT NULL
-        THEN 'Médio'
-        WHEN r.review_score >= 4
-        THEN 'Baixo'
-        ELSE 'Não Avaliado'
-    END AS risco_insatisfacao
+FROM PUBLIC.SILVER_REVIEWS_ENRICHED r
 
-FROM silver.reviews r
+LEFT JOIN PUBLIC.SILVER_ORDERS_ENRICHED o
+    ON r.ORDER_ID = o.ORDER_ID
 
-LEFT JOIN silver.orders o
-    ON r.order_id = o.order_id
+LEFT JOIN PUBLIC.GOLD_DIM_CLIENTE dc
+    ON o.CUSTOMER_ID = dc.CUSTOMER_ID
 
-LEFT JOIN gold.dim_cliente dc
-    ON o.customer_id = dc.customer_id
+LEFT JOIN PUBLIC.GOLD_DIM_TEMPO dt
+    ON r.REVIEW_CREATION_DATE_ONLY = dt.DATA
 
-LEFT JOIN gold.dim_tempo dt
-    ON CAST(r.review_creation_date AS DATE) = dt.data
-
-WHERE r.review_id IS NOT NULL;
+WHERE r.REVIEW_ID IS NOT NULL;

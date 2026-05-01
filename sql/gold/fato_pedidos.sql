@@ -1,89 +1,68 @@
 -- ============================================================
--- Tabela: fato_pedidos
+-- Tabela: PUBLIC.GOLD_FATO_PEDIDOS
 -- Camada: Gold
 -- Objetivo: Fato principal de pedidos, vendas, frete e entrega
--- Origem: orders + order_items + dim_cliente + dim_produto + dim_vendedor
+-- Origem: PUBLIC.SILVER_ORDERS_ENRICHED + PUBLIC.SILVER_ORDER_ITEMS_ENRICHED
 -- ============================================================
 
-CREATE OR REPLACE TABLE gold.fato_pedidos AS
-WITH itens AS (
+CREATE OR REPLACE TABLE PUBLIC.GOLD_FATO_PEDIDOS AS
+WITH ITENS AS (
     SELECT
-        order_id,
-        product_id,
-        seller_id,
-        COUNT(*) AS quantidade_itens,
-        SUM(price) AS valor_produtos,
-        SUM(freight_value) AS valor_frete,
-        SUM(price + freight_value) AS valor_total_pedido
-    FROM silver.order_items
+        ORDER_ID,
+        PRODUCT_ID,
+        SELLER_ID,
+        COUNT(*) AS QUANTIDADE_ITENS,
+        SUM(PRICE) AS VALOR_PRODUTOS,
+        SUM(FREIGHT_VALUE) AS VALOR_FRETE,
+        SUM(ITEM_TOTAL_VALUE) AS VALOR_TOTAL_PEDIDO
+    FROM PUBLIC.SILVER_ORDER_ITEMS_ENRICHED
     GROUP BY
-        order_id,
-        product_id,
-        seller_id
-),
-
-pedidos AS (
-    SELECT
-        order_id,
-        customer_id,
-        order_status,
-        CAST(order_purchase_timestamp AS DATE) AS data_compra,
-        CAST(order_approved_at AS DATE) AS data_aprovacao,
-        CAST(order_delivered_carrier_date AS DATE) AS data_envio_transportadora,
-        CAST(order_delivered_customer_date AS DATE) AS data_entrega_cliente,
-        CAST(order_estimated_delivery_date AS DATE) AS data_estimada_entrega
-    FROM silver.orders
+        ORDER_ID,
+        PRODUCT_ID,
+        SELLER_ID
 )
 
 SELECT
-    p.order_id,
-    dc.sk_cliente,
-    dp.sk_produto,
-    dv.sk_vendedor,
-    dt.sk_tempo AS sk_tempo_compra,
+    o.ORDER_ID,
 
-    p.order_status,
+    dc.SK_CLIENTE,
+    dp.SK_PRODUTO,
+    dv.SK_VENDEDOR,
+    dt.SK_TEMPO AS SK_TEMPO_COMPRA,
 
-    p.data_compra,
-    p.data_aprovacao,
-    p.data_envio_transportadora,
-    p.data_entrega_cliente,
-    p.data_estimada_entrega,
+    o.ORDER_STATUS,
+    o.DELIVERY_STATUS,
 
-    i.quantidade_itens,
-    i.valor_produtos,
-    i.valor_frete,
-    i.valor_total_pedido,
+    o.ORDER_PURCHASE_DATE AS DATA_COMPRA,
+    o.ORDER_APPROVED_DATE AS DATA_APROVACAO,
+    o.ORDER_DELIVERED_CARRIER_DATE_ONLY AS DATA_ENVIO_TRANSPORTADORA,
+    o.ORDER_DELIVERED_CUSTOMER_DATE_ONLY AS DATA_ENTREGA_CLIENTE,
+    o.ORDER_ESTIMATED_DELIVERY_DATE_ONLY AS DATA_ESTIMADA_ENTREGA,
 
-    CASE
-        WHEN p.data_entrega_cliente IS NULL THEN NULL
-        WHEN p.data_estimada_entrega IS NULL THEN NULL
-        WHEN p.data_entrega_cliente > p.data_estimada_entrega THEN 1
-        ELSE 0
-    END AS flag_entrega_atrasada,
+    i.QUANTIDADE_ITENS,
+    i.VALOR_PRODUTOS,
+    i.VALOR_FRETE,
+    i.VALOR_TOTAL_PEDIDO,
 
-    CASE
-        WHEN p.data_entrega_cliente IS NULL THEN NULL
-        ELSE DATE_DIFF('day', p.data_compra, p.data_entrega_cliente)
-    END AS dias_ate_entrega,
+    o.IS_DELIVERY_DELAYED AS FLAG_ENTREGA_ATRASADA,
+    o.DAYS_TO_DELIVER AS DIAS_ATE_ENTREGA,
+    o.DAYS_DELAY AS DIAS_ATRASO,
 
-    CASE
-        WHEN p.data_entrega_cliente IS NULL THEN NULL
-        ELSE DATE_DIFF('day', p.data_estimada_entrega, p.data_entrega_cliente)
-    END AS dias_atraso
+    CURRENT_TIMESTAMP() AS GOLD_CREATED_AT
 
-FROM pedidos p
-INNER JOIN itens i
-    ON p.order_id = i.order_id
+FROM PUBLIC.SILVER_ORDERS_ENRICHED o
 
-LEFT JOIN gold.dim_cliente dc
-    ON p.customer_id = dc.customer_id
+INNER JOIN ITENS i
+    ON o.ORDER_ID = i.ORDER_ID
 
-LEFT JOIN gold.dim_produto dp
-    ON i.product_id = dp.product_id
+LEFT JOIN PUBLIC.GOLD_DIM_CLIENTE dc
+    ON o.CUSTOMER_ID = dc.CUSTOMER_ID
 
-LEFT JOIN gold.dim_vendedor dv
-    ON i.seller_id = dv.seller_id
+LEFT JOIN PUBLIC.GOLD_DIM_PRODUTO dp
+    ON i.PRODUCT_ID = dp.PRODUCT_ID
 
-LEFT JOIN gold.dim_tempo dt
-    ON p.data_compra = dt.data;
+LEFT JOIN PUBLIC.GOLD_DIM_VENDEDOR dv
+    ON i.SELLER_ID = dv.SELLER_ID
+
+LEFT JOIN PUBLIC.GOLD_DIM_TEMPO dt
+    ON o.ORDER_PURCHASE_DATE = dt.DATA;

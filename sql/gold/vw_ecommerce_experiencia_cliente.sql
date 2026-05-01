@@ -1,75 +1,76 @@
 -- ============================================================
--- View: vw_ecommerce_experiencia_cliente
+-- View: PUBLIC.GOLD_VW_ECOMMERCE_EXPERIENCIA_CLIENTE
 -- Camada: Gold
 -- Objetivo: Visão consolidada para análise de experiência do cliente
--- Origem: fato_reviews + fato_pedidos + dimensões
+-- Origem: PUBLIC.GOLD_FATO_REVIEWS + PUBLIC.GOLD_FATO_PEDIDOS + dimensões
 -- ============================================================
 
-CREATE OR REPLACE VIEW gold.vw_ecommerce_experiencia_cliente AS
+CREATE OR REPLACE VIEW PUBLIC.GOLD_VW_ECOMMERCE_EXPERIENCIA_CLIENTE AS
 SELECT
-    fr.review_id,
-    fr.order_id,
+    fr.REVIEW_ID,
+    fr.ORDER_ID,
 
-    dt.data AS data_review,
-    dt.ano,
-    dt.mes,
-    dt.trimestre,
+    dt.DATA AS DATA_REVIEW,
+    dt.ANO,
+    dt.MES,
+    dt.TRIMESTRE,
 
-    dc.customer_state AS estado_cliente,
-    dc.customer_city AS cidade_cliente,
+    dc.CUSTOMER_STATE AS ESTADO_CLIENTE,
+    dc.CUSTOMER_CITY AS CIDADE_CLIENTE,
 
-    dp.product_category_name,
-    dp.product_category_name_english,
+    dp.PRODUCT_CATEGORY_NAME,
 
-    dv.seller_state AS estado_vendedor,
-    dv.seller_city AS cidade_vendedor,
+    dv.SELLER_STATE AS ESTADO_VENDEDOR,
+    dv.SELLER_CITY AS CIDADE_VENDEDOR,
 
-    fp.order_status,
-    fp.data_compra,
-    fp.data_entrega_cliente,
-    fp.data_estimada_entrega,
-    fp.flag_entrega_atrasada,
-    fp.dias_ate_entrega,
-    fp.dias_atraso,
+    fp.ORDER_STATUS,
+    fp.DELIVERY_STATUS,
+    fp.DATA_COMPRA,
+    fp.DATA_ENTREGA_CLIENTE,
+    fp.DATA_ESTIMADA_ENTREGA,
+    fp.FLAG_ENTREGA_ATRASADA,
+    fp.DIAS_ATE_ENTREGA,
+    fp.DIAS_ATRASO,
 
-    fr.review_score,
-    fr.classificacao_review,
-    fr.flag_review_negativo,
-    fr.flag_review_positivo,
-    fr.flag_possui_comentario,
-    fr.risco_insatisfacao,
-    fr.review_comment_title,
-    fr.review_comment_message,
+    fr.REVIEW_SCORE,
+    fr.REVIEW_CLASSIFICATION,
+    fr.IS_NEGATIVE_REVIEW,
+    fr.IS_POSITIVE_REVIEW,
+    fr.HAS_REVIEW_COMMENT,
+    fr.DISSATISFACTION_RISK,
+    fr.REVIEW_TOPIC,
+    fr.REVIEW_COMMENT_TITLE,
+    fr.REVIEW_COMMENT_MESSAGE,
 
     CASE
-        WHEN fp.flag_entrega_atrasada = 1 AND fr.review_score <= 2
-        THEN 'Atraso com review negativo'
+        WHEN fp.FLAG_ENTREGA_ATRASADA = 1 AND fr.REVIEW_SCORE <= 2
+            THEN 'Atraso com review negativo'
 
-        WHEN fp.flag_entrega_atrasada = 1 AND fr.review_score >= 4
-        THEN 'Atraso com review positivo'
+        WHEN fp.FLAG_ENTREGA_ATRASADA = 1 AND fr.REVIEW_SCORE >= 4
+            THEN 'Atraso com review positivo'
 
-        WHEN fp.flag_entrega_atrasada = 0 AND fr.review_score <= 2
-        THEN 'No prazo com review negativo'
+        WHEN fp.FLAG_ENTREGA_ATRASADA = 0 AND fr.REVIEW_SCORE <= 2
+            THEN 'No prazo com review negativo'
 
-        WHEN fp.flag_entrega_atrasada = 0 AND fr.review_score >= 4
-        THEN 'No prazo com review positivo'
+        WHEN fp.FLAG_ENTREGA_ATRASADA = 0 AND fr.REVIEW_SCORE >= 4
+            THEN 'No prazo com review positivo'
 
         ELSE 'Cenário neutro ou não classificado'
-    END AS categoria_experiencia
+    END AS CATEGORIA_EXPERIENCIA
 
-FROM gold.fato_reviews fr
+FROM PUBLIC.GOLD_FATO_REVIEWS fr
 
-LEFT JOIN gold.fato_pedidos fp
-    ON fr.order_id = fp.order_id
+LEFT JOIN PUBLIC.GOLD_FATO_PEDIDOS fp
+    ON fr.ORDER_ID = fp.ORDER_ID
 
-LEFT JOIN gold.dim_tempo dt
-    ON fr.sk_tempo_review = dt.sk_tempo
+LEFT JOIN PUBLIC.GOLD_DIM_TEMPO dt
+    ON fr.SK_TEMPO_REVIEW = dt.SK_TEMPO
 
-LEFT JOIN gold.dim_cliente dc
-    ON fr.sk_cliente = dc.sk_cliente
+LEFT JOIN PUBLIC.GOLD_DIM_CLIENTE dc
+    ON fr.SK_CLIENTE = dc.SK_CLIENTE
 
-LEFT JOIN gold.dim_produto dp
-    ON fp.sk_produto = dp.sk_produto
+LEFT JOIN PUBLIC.GOLD_DIM_PRODUTO dp
+    ON fp.SK_PRODUTO = dp.SK_PRODUTO
 
-LEFT JOIN gold.dim_vendedor dv
-    ON fp.sk_vendedor = dv.sk_vendedor;
+LEFT JOIN PUBLIC.GOLD_DIM_VENDEDOR dv
+    ON fp.SK_VENDEDOR = dv.SK_VENDEDOR;

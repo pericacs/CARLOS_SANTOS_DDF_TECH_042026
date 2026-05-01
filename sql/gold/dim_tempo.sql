@@ -1,46 +1,56 @@
 -- ============================================================
--- Tabela: dim_tempo
+-- Tabela: PUBLIC.GOLD_DIM_TEMPO
 -- Camada: Gold
 -- Objetivo: Dimensão calendário para análises temporais
--- Origem: orders
+-- Origem: PUBLIC.SILVER_ORDERS_ENRICHED + PUBLIC.SILVER_REVIEWS_ENRICHED
 -- ============================================================
 
-CREATE OR REPLACE TABLE gold.dim_tempo AS
-WITH datas AS (
+CREATE OR REPLACE TABLE PUBLIC.GOLD_DIM_TEMPO AS
+WITH DATAS AS (
     SELECT DISTINCT
-        CAST(order_purchase_timestamp AS DATE) AS data
-    FROM silver.orders
-    WHERE order_purchase_timestamp IS NOT NULL
+        CAST(ORDER_PURCHASE_TIMESTAMP AS DATE) AS DATA
+    FROM PUBLIC.SILVER_ORDERS_ENRICHED
+    WHERE ORDER_PURCHASE_TIMESTAMP IS NOT NULL
 
     UNION
 
     SELECT DISTINCT
-        CAST(order_approved_at AS DATE) AS data
-    FROM silver.orders
-    WHERE order_approved_at IS NOT NULL
+        CAST(ORDER_APPROVED_AT AS DATE) AS DATA
+    FROM PUBLIC.SILVER_ORDERS_ENRICHED
+    WHERE ORDER_APPROVED_AT IS NOT NULL
 
     UNION
 
     SELECT DISTINCT
-        CAST(order_delivered_customer_date AS DATE) AS data
-    FROM silver.orders
-    WHERE order_delivered_customer_date IS NOT NULL
+        CAST(ORDER_DELIVERED_CUSTOMER_DATE AS DATE) AS DATA
+    FROM PUBLIC.SILVER_ORDERS_ENRICHED
+    WHERE ORDER_DELIVERED_CUSTOMER_DATE IS NOT NULL
 
     UNION
 
     SELECT DISTINCT
-        CAST(order_estimated_delivery_date AS DATE) AS data
-    FROM silver.orders
-    WHERE order_estimated_delivery_date IS NOT NULL
+        CAST(ORDER_ESTIMATED_DELIVERY_DATE AS DATE) AS DATA
+    FROM PUBLIC.SILVER_ORDERS_ENRICHED
+    WHERE ORDER_ESTIMATED_DELIVERY_DATE IS NOT NULL
+
+    UNION
+
+    SELECT DISTINCT
+        CAST(REVIEW_CREATION_DATE AS DATE) AS DATA
+    FROM PUBLIC.SILVER_REVIEWS_ENRICHED
+    WHERE REVIEW_CREATION_DATE IS NOT NULL
 )
 
 SELECT
-    CAST(REPLACE(CAST(data AS VARCHAR), '-', '') AS INTEGER) AS sk_tempo,
-    data,
-    EXTRACT(YEAR FROM data) AS ano,
-    EXTRACT(MONTH FROM data) AS mes,
-    EXTRACT(DAY FROM data) AS dia,
-    EXTRACT(QUARTER FROM data) AS trimestre,
-    EXTRACT(DOW FROM data) AS dia_semana
-FROM datas
-WHERE data IS NOT NULL;
+    TO_NUMBER(TO_CHAR(DATA, 'YYYYMMDD')) AS SK_TEMPO,
+    DATA,
+    YEAR(DATA) AS ANO,
+    MONTH(DATA) AS MES,
+    DAY(DATA) AS DIA,
+    QUARTER(DATA) AS TRIMESTRE,
+    DAYOFWEEK(DATA) AS DIA_SEMANA,
+    DAYNAME(DATA) AS NOME_DIA_SEMANA,
+    MONTHNAME(DATA) AS NOME_MES,
+    CURRENT_TIMESTAMP() AS GOLD_CREATED_AT
+FROM DATAS
+WHERE DATA IS NOT NULL;
