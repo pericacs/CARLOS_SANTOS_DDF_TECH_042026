@@ -75,17 +75,17 @@ evidencias/data_quality/validacoes_great_expectations.png
 
 | Evidência | Status | Link / Caminho |
 |---|---|---|
-| Dataset `orders` carregado | Pendente | Link Dadosfera |
-| Dataset `order_items` carregado | Pendente | Link Dadosfera |
-| Dataset `customers` carregado | Pendente | Link Dadosfera |
-| Dataset `products` carregado | Pendente | Link Dadosfera |
-| Dataset `payments` carregado | Pendente | Link Dadosfera |
-| Dataset `reviews` carregado | Pendente | Link Dadosfera |
-| Dataset `sellers` carregado | Pendente | Link Dadosfera |
-| Dataset `geolocation` carregado | Pendente | Link Dadosfera |
-| Dataset `category_translation` carregado | Pendente | Link Dadosfera |
-| Datasets organizados em zona/camada | Pendente | Link Dadosfera |
-| Datasets catalogados | Pendente | Link Dadosfera |
+| Dataset `orders` carregado | Concluído | Link Dadosfera |
+| Dataset `order_items` carregado | Concluído | Link Dadosfera |
+| Dataset `customers` carregado | Concluído | Link Dadosfera |
+| Dataset `products` carregado | Concluído | Link Dadosfera |
+| Dataset `payments` carregado | Concluído | Link Dadosfera |
+| Dataset `reviews` carregado | Concluído | Link Dadosfera |
+| Dataset `sellers` carregado | Concluído | Link Dadosfera |
+| Dataset `geolocation` carregado | Concluído | Link Dadosfera |
+| Dataset `category_translation` carregado | Concluído | Link Dadosfera |
+| Datasets organizados em zona/camada | Concluído | Link Dadosfera |
+| Datasets catalogados | Concluído | Link Dadosfera |
 
 Sugestões de prints:
 
