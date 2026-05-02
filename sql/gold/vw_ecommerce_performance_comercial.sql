@@ -10,6 +10,7 @@ SELECT
     dt.DATA AS DATA_COMPRA,
     dt.ANO,
     dt.MES,
+    dt.NOME_MES
     dt.TRIMESTRE,
 
     dc.CUSTOMER_STATE AS ESTADO_CLIENTE,
@@ -55,6 +56,7 @@ GROUP BY
     dt.DATA,
     dt.ANO,
     dt.MES,
+    dt.NOME_MES,
     dt.TRIMESTRE,
     dc.CUSTOMER_STATE,
     dc.CUSTOMER_CITY,

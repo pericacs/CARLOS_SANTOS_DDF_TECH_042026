@@ -118,14 +118,14 @@ evidencias/dadosfera/catalogo/catalogo_gold.png
 
 | Evidência | Status | Link / Caminho |
 |---|---|---|
-| Dashboard criado na Dadosfera | Pendente | Link Dadosfera |
-| Pelo menos 5 visualizações criadas | Pendente | Link Dadosfera |
-| Faturamento mensal criado | Pendente | Print |
-| Pedidos por estado criado | Pendente | Print |
-| Faturamento por categoria criado | Pendente | Print |
-| Percentual de entregas atrasadas criado | Pendente | Print |
-| Nota média por categoria criada | Pendente | Print |
-| Dashboard documentado | Pendente | `apresentacao/planejamento_dashboard.md` |
+| Dashboard criado na Dadosfera | Concluído | Link Dadosfera |
+| Pelo menos 5 visualizações criadas | Concluído | `evidencias/dashboard/` |
+| Faturamento mensal criado | Concluído | `dashboard_faturamento_mensal.png` |
+| Pedidos por estado criado | Concluído | `dashboard_pedidos_estado.png` |
+| Faturamento por categoria criado | Concluído | `dashboard_faturamento_categoria.png` |
+| Percentual de entregas atrasadas criado | Concluído | `dashboard_percentual_atraso.png` |
+| Nota média por categoria criada | Concluído | `dashboard_nota_media_categoria.png` |
+| Dashboard documentado | Concluído | `apresentacao/planejamento_dashboard.md` |
 
 Sugestões de prints:
 
