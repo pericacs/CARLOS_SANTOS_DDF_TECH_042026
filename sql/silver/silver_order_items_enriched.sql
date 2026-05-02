@@ -1,10 +1,3 @@
--- ============================================================
--- Tabela: PUBLIC.SILVER_ORDER_ITEMS_ENRICHED
--- Camada: Silver
--- Origem: PUBLIC.BRONZE_ORDER_ITEMS + PRODUCTS + SELLERS
--- Objetivo: Enriquecer itens de pedido com produto, categoria e vendedor
--- ============================================================
-
 CREATE OR REPLACE TABLE PUBLIC.SILVER_ORDER_ITEMS_ENRICHED AS
 SELECT
     oi.ORDER_ID,
@@ -13,6 +6,7 @@ SELECT
     oi.SELLER_ID,
 
     p.PRODUCT_CATEGORY_NAME,
+    ct.PRODUCT_CATEGORY_NAME_ENGLISH,
 
     p.PRODUCT_NAME_LENGHT,
     p.PRODUCT_DESCRIPTION_LENGHT,
@@ -53,6 +47,9 @@ FROM PUBLIC.BRONZE_ORDER_ITEMS oi
 
 LEFT JOIN PUBLIC.BRONZE_PRODUCTS p
     ON oi.PRODUCT_ID = p.PRODUCT_ID
+
+LEFT JOIN PUBLIC.BRONZE_CATEGORY_TRANSLATION ct
+    ON p.PRODUCT_CATEGORY_NAME = ct.PRODUCT_CATEGORY_NAME
 
 LEFT JOIN PUBLIC.BRONZE_SELLERS s
     ON oi.SELLER_ID = s.SELLER_ID;

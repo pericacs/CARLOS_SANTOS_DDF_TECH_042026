@@ -1,10 +1,3 @@
--- ============================================================
--- Tabela: PUBLIC.SILVER_ORDERS_ENRICHED
--- Camada: Silver
--- Origem: PUBLIC.BRONZE_ORDERS + PUBLIC.BRONZE_CUSTOMERS
--- Objetivo: Enriquecer pedidos com dados do cliente e métricas logísticas
--- ============================================================
-
 CREATE OR REPLACE TABLE PUBLIC.SILVER_ORDERS_ENRICHED AS
 SELECT
     o.ORDER_ID,

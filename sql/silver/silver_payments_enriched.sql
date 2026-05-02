@@ -1,10 +1,3 @@
--- ============================================================
--- Tabela: PUBLIC.SILVER_PAYMENTS_ENRICHED
--- Camada: Silver
--- Origem: PUBLIC.BRONZE_PAYMENTS
--- Objetivo: Padronizar e classificar pagamentos dos pedidos
--- ============================================================
-
 CREATE OR REPLACE TABLE PUBLIC.SILVER_PAYMENTS_ENRICHED AS
 SELECT
     ORDER_ID,
