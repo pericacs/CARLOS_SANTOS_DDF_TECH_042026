@@ -182,17 +182,17 @@ Antes de enviar o case, validar:
 - [X] Repositório GitHub público ou acessível
 - [X] README principal atualizado
 - [ ] Link do vídeo incluído no README
-- [ ] Links da Dadosfera incluídos no README
+- [X] Links da Dadosfera incluídos no README
 - [X] Prints salvos na pasta `evidencias/`
 - [X] Data Quality executado
 - [X] Relatório de Data Quality versionado
 - [X] SQLs da modelagem versionados
-- [ ] Data App versionado
-- [ ] Dashboard criado com pelo menos 5 visualizações
-- [ ] Dicionário de dados criado
-- [ ] Commits enviados para o GitHub
-- [ ] Nenhum CSV pesado enviado ao GitHub
-- [ ] `.gitignore` funcionando corretamente
+- [X] Data App versionado
+- [X] Dashboard criado com pelo menos 5 visualizações
+- [X] Dicionário de dados criado
+- [X] Commits enviados para o GitHub
+- [X] Nenhum CSV pesado enviado ao GitHub
+- [X] `.gitignore` funcionando corretamente
 
 ---
 

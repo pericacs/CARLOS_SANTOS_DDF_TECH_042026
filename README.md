@@ -671,6 +671,13 @@ Executar o app:
 streamlit run app.py
 ```
 
+### 14.3 Evidências do Data App
+
+As evidências do Data App estão disponíveis em:
+
+```text
+evidencias/data_app/
+```
 ---
 
 ## 15. Estrutura do Repositório
@@ -754,10 +761,15 @@ Os arquivos da base Olist foram carregados na Dadosfera na camada Raw, utilizand
 
 ### 16.2 Dashboard
 
-| Ativo | Link | Print |
-|------|------|-------|
-| Dashboard E-commerce Analytics | Pendente | Pendente |
+O dashboard foi criado na Dadosfera utilizando as views analíticas da camada Gold.
 
+Views utilizadas:
+
+```text
+PUBLIC.GOLD_VW_ECOMMERCE_PERFORMANCE_COMERCIAL
+PUBLIC.GOLD_VW_ECOMMERCE_EXPERIENCIA_CLIENTE
+PUBLIC.GOLD_FATO_REVIEWS
+```
 ---
 
 ### 16.3 Pipeline
@@ -772,7 +784,7 @@ Os arquivos da base Olist foram carregados na Dadosfera na camada Raw, utilizand
 
 | Ativo | Link | Print |
 |------|------|-------|
-| Streamlit App | Pendente | Pendente |
+| Streamlit App | `streamlit_app/app.py` | `evidencias/data_app/data_app_visao_geral.png` |
 
 ---
 
