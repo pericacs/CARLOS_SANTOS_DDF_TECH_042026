@@ -1,7 +1,7 @@
 -- ============================================================
 -- Tabela: PUBLIC.BRONZE_CUSTOMERS
 -- Camada: Bronze
--- Origem: PUBLIC.RAW_CUSTOMERS
+-- Origem: PUBLIC.TB__JIZIE8__PUBLIC__TB_CUSTOMERS
 -- Objetivo: Padronizar dados cadastrais e geográficos dos clientes
 -- ============================================================
 
@@ -14,4 +14,4 @@ SELECT
     UPPER(TRIM(CUSTOMER_STATE)) AS CUSTOMER_STATE,
 
     CURRENT_TIMESTAMP() AS BRONZE_CREATED_AT
-FROM PUBLIC.RAW_CUSTOMERS;
+FROM PUBLIC.TB__JIZIE8__PUBLIC__TB_CUSTOMERS;

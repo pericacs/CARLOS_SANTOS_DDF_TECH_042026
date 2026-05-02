@@ -1,7 +1,7 @@
 -- ============================================================
 -- Tabela: PUBLIC.BRONZE_ORDERS
 -- Camada: Bronze
--- Origem: PUBLIC.RAW_ORDERS
+-- Origem: PUBLIC.TB__JIZIE8__PUBLIC__TB_ORDERS
 -- Objetivo: Padronizar tipos e nomes da tabela de pedidos
 -- ============================================================
 
@@ -18,4 +18,4 @@ SELECT
     TRY_TO_TIMESTAMP_NTZ(ORDER_ESTIMATED_DELIVERY_DATE) AS ORDER_ESTIMATED_DELIVERY_DATE,
 
     CURRENT_TIMESTAMP() AS BRONZE_CREATED_AT
-FROM PUBLIC.RAW_ORDERS;
+FROM PUBLIC.TB__JIZIE8__PUBLIC__TB_ORDERS;
