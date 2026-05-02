@@ -12,16 +12,16 @@ As evidências devem comprovar que os dados foram carregados, catalogados, valid
 
 | Evidência | Status | Caminho / Link |
 |---|---|---|
-| Repositório criado com nome correto | Pendente | `CARLOS_SANTOS_DDF_TECH_042026` |
-| README principal completo | Pendente | `README.md` |
-| Estrutura de pastas criada | Pendente | Raiz do projeto |
-| Dicionário de dados criado | Pendente | `data/dicionario_dados_olist.md` |
-| Instruções de download criadas | Pendente | `data/instrucoes_download_olist.md` |
-| Script de exploração criado | Pendente | `notebooks/01_exploracao_olist.py` |
-| Script de Data Quality criado | Pendente | `data_quality/great_expectations_olist.py` |
-| SQLs da camada Gold criados | Pendente | `sql/gold/` |
-| Data App criado | Pendente | `streamlit_app/app.py` |
-| Roteiro do vídeo criado | Pendente | `apresentacao/roteiro_video.md` |
+| Repositório criado com nome correto | Concluído | `CARLOS_SANTOS_DDF_TECH_042026` |
+| README principal completo | Concluído | `README.md` |
+| Estrutura de pastas criada | Concluído | Raiz do projeto |
+| Dicionário de dados criado | Concluído | `data/dicionario_dados_olist.md` |
+| Instruções de download criadas | Concluído | `data/instrucoes_download_olist.md` |
+| Script de exploração criado | Concluído | `notebooks/01_exploracao_olist.py` |
+| Script de Data Quality criado | Concluído | `data_quality/great_expectations_olist.py` |
+| SQLs da camada Gold criados | Concluído | `sql/gold/` |
+| Data App criado | Concluído | `streamlit_app/app.py` |
+| Roteiro do vídeo criado | Concluído | `apresentacao/roteiro_video.md` |
 
 ---
 
@@ -29,15 +29,15 @@ As evidências devem comprovar que os dados foram carregados, catalogados, valid
 
 | Evidência | Status | Caminho |
 |---|---|---|
-| Arquivo `olist_orders_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_order_items_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_customers_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_products_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_order_payments_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_order_reviews_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_sellers_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `olist_geolocation_dataset.csv` disponível localmente | Pendente | `data/raw/` |
-| Arquivo `product_category_name_translation.csv` disponível localmente | Pendente | `data/raw/` |
+| Arquivo `olist_orders_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_order_items_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_customers_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_products_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_order_payments_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_order_reviews_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_sellers_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `olist_geolocation_dataset.csv` disponível localmente | Concluído | `data/raw/` |
+| Arquivo `product_category_name_translation.csv` disponível localmente | Concluído | `data/raw/` |
 
 ---
 
@@ -102,15 +102,15 @@ evidencias/dadosfera/catalogo/catalogo_gold.png
 
 | Evidência | Status | Caminho |
 |---|---|---|
-| SQL `dim_cliente` criado | Pendente | `sql/gold/dim_cliente.sql` |
-| SQL `dim_produto` criado | Pendente | `sql/gold/dim_produto.sql` |
-| SQL `dim_vendedor` criado | Pendente | `sql/gold/dim_vendedor.sql` |
-| SQL `dim_tempo` criado | Pendente | `sql/gold/dim_tempo.sql` |
-| SQL `fato_pedidos` criado | Pendente | `sql/gold/fato_pedidos.sql` |
-| SQL `fato_pagamentos` criado | Pendente | `sql/gold/fato_pagamentos.sql` |
-| SQL `fato_reviews` criado | Pendente | `sql/gold/fato_reviews.sql` |
-| View comercial criada | Pendente | `sql/gold/vw_ecommerce_performance_comercial.sql` |
-| View experiência cliente criada | Pendente | `sql/gold/vw_ecommerce_experiencia_cliente.sql` |
+| SQL `dim_cliente` criado | Concluído | `sql/gold/dim_cliente.sql` |
+| SQL `dim_produto` criado | Concluído | `sql/gold/dim_produto.sql` |
+| SQL `dim_vendedor` criado | Concluído | `sql/gold/dim_vendedor.sql` |
+| SQL `dim_tempo` criado | Concluído | `sql/gold/dim_tempo.sql` |
+| SQL `fato_pedidos` criado | Concluído | `sql/gold/fato_pedidos.sql` |
+| SQL `fato_pagamentos` criado | Concluído | `sql/gold/fato_pagamentos.sql` |
+| SQL `fato_reviews` criado | Concluído | `sql/gold/fato_reviews.sql` |
+| View comercial criada | Concluído | `sql/gold/vw_ecommerce_performance_comercial.sql` |
+| View experiência cliente criada | Concluído | `sql/gold/vw_ecommerce_experiencia_cliente.sql` |
 
 ---
 
@@ -179,14 +179,14 @@ Pendente
 
 Antes de enviar o case, validar:
 
-- [ ] Repositório GitHub público ou acessível
-- [ ] README principal atualizado
+- [X] Repositório GitHub público ou acessível
+- [X] README principal atualizado
 - [ ] Link do vídeo incluído no README
 - [ ] Links da Dadosfera incluídos no README
-- [ ] Prints salvos na pasta `evidencias/`
+- [X] Prints salvos na pasta `evidencias/`
 - [X] Data Quality executado
 - [X] Relatório de Data Quality versionado
-- [ ] SQLs da modelagem versionados
+- [X] SQLs da modelagem versionados
 - [ ] Data App versionado
 - [ ] Dashboard criado com pelo menos 5 visualizações
 - [ ] Dicionário de dados criado

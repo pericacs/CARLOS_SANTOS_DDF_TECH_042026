@@ -608,6 +608,24 @@ PUBLIC.GOLD_*
 
 Essa documentação define a sequência correta para criação das tabelas Bronze, Silver, dimensões Gold, fatos Gold e views analíticas.
 
+### 13.4 Camadas Executadas na Dadosfera
+
+As camadas Bronze, Silver e Gold foram criadas na Dadosfera a partir das tabelas Raw carregadas no schema `PUBLIC`.
+
+Fluxo executado:
+
+```text
+PUBLIC.TB__JIZIE8__PUBLIC__TB_* 
+    ↓
+PUBLIC.BRONZE_*
+    ↓
+PUBLIC.SILVER_*_ENRICHED
+    ↓
+PUBLIC.GOLD_*
+    ↓
+PUBLIC.GOLD_VW_*
+```
+
 ---
 
 ## 14. Data App com Streamlit
