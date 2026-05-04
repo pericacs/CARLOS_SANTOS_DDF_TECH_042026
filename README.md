@@ -792,10 +792,10 @@ PUBLIC.GOLD_FATO_REVIEWS
 
 O vídeo final será publicado como não listado no YouTube.
 
-Link do vídeo:
+Link do vídeo: https://youtu.be/m6fCxcJlSaw
 
 ```text
-Pendente
+Concluido
 ```
 
 A apresentação irá abordar:

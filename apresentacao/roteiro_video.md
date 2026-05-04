@@ -210,21 +210,21 @@ Durante a gravação, seguir esta ordem:
 
 Antes de gravar o vídeo, validar:
 
-- [ ] Repositório GitHub atualizado
-- [ ] README completo
-- [ ] Dicionário de dados criado
-- [ ] Script de exploração criado
-- [ ] Relatório de exploração gerado
-- [ ] Script de Data Quality criado
-- [ ] Relatório de Data Quality gerado
-- [ ] SQLs da camada Gold criados
-- [ ] Planejamento do dashboard criado
-- [ ] Data App funcionando localmente
-- [ ] Prints salvos em `evidencias/`
-- [ ] Datasets carregados na Dadosfera
-- [ ] Links dos ativos adicionados ao README
-- [ ] Dashboard criado na Dadosfera
-- [ ] Link do vídeo adicionado ao README
+- [X] Repositório GitHub atualizado
+- [X] README completo
+- [X] Dicionário de dados criado
+- [X] Script de exploração criado
+- [X] Relatório de exploração gerado
+- [X] Script de Data Quality criado
+- [X] Relatório de Data Quality gerado
+- [X] SQLs da camada Gold criados
+- [X] Planejamento do dashboard criado
+- [X] Data App funcionando localmente
+- [X] Prints salvos em `evidencias/`
+- [X] Datasets carregados na Dadosfera
+- [X] Links dos ativos adicionados ao README
+- [X] Dashboard criado na Dadosfera
+- [X] Link do vídeo adicionado ao README
 
 ---
 
@@ -232,6 +232,8 @@ Antes de gravar o vídeo, validar:
 
 Após publicar o vídeo no YouTube como não listado, adicionar o link abaixo:
 
+https://youtu.be/m6fCxcJlSaw
+
 ```text
-Pendente
+concluido
 ```
