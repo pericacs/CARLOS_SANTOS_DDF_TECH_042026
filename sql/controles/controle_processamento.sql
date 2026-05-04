@@ -1,0 +1,44 @@
+-- ============================================================
+-- Tabela: PUBLIC.CONTROLE_PROCESSAMENTO
+-- Objetivo: Controlar execuções das camadas Raw, Bronze, Silver e Gold
+-- ============================================================
+
+CREATE OR REPLACE TABLE PUBLIC.CONTROLE_PROCESSAMENTO (
+    ID_EXECUCAO VARCHAR,
+    NOME_CAMADA VARCHAR,
+    NOME_OBJETO VARCHAR,
+    TIPO_PROCESSAMENTO VARCHAR,
+    DATA_INICIO TIMESTAMP_NTZ,
+    DATA_FIM TIMESTAMP_NTZ,
+    STATUS VARCHAR,
+    TOTAL_REGISTROS NUMBER,
+    MENSAGEM_ERRO VARCHAR,
+    CREATED_AT TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
+);
+
+-- ============================================================
+-- Exemplo de registro de controle para Bronze
+-- ============================================================
+
+INSERT INTO PUBLIC.CONTROLE_PROCESSAMENTO (
+    ID_EXECUCAO,
+    NOME_CAMADA,
+    NOME_OBJETO,
+    TIPO_PROCESSAMENTO,
+    DATA_INICIO,
+    DATA_FIM,
+    STATUS,
+    TOTAL_REGISTROS,
+    MENSAGEM_ERRO
+)
+SELECT
+    UUID_STRING() AS ID_EXECUCAO,
+    'BRONZE' AS NOME_CAMADA,
+    'PUBLIC.BRONZE_ORDERS' AS NOME_OBJETO,
+    'FULL_LOAD' AS TIPO_PROCESSAMENTO,
+    CURRENT_TIMESTAMP() AS DATA_INICIO,
+    CURRENT_TIMESTAMP() AS DATA_FIM,
+    'SUCESSO' AS STATUS,
+    COUNT(*) AS TOTAL_REGISTROS,
+    NULL AS MENSAGEM_ERRO
+FROM PUBLIC.BRONZE_ORDERS;
