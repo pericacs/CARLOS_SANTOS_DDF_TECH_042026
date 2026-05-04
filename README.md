@@ -109,18 +109,18 @@ Os principais objetivos analíticos deste projeto são:
 |------|-----------|--------|
 | 1 | Definição do problema de negócio | Concluído |
 | 2 | Escolha da base de dados | Concluído |
-| 3 | Download e exploração inicial dos dados | Em andamento |
-| 4 | Carga dos dados na Dadosfera | Pendente |
-| 5 | Catalogação dos datasets | Pendente |
-| 6 | Criação do dicionário de dados | Pendente |
-| 7 | Execução de Data Quality | Pendente |
-| 8 | Feature engineering com IA | Pendente |
-| 9 | Modelagem dimensional | Pendente |
-| 10 | Criação das views finais | Pendente |
-| 11 | Construção do dashboard | Pendente |
-| 12 | Criação do pipeline | Pendente |
-| 13 | Desenvolvimento do Data App | Pendente |
-| 14 | Gravação da apresentação | Pendente |
+| 3 | Download e exploração inicial dos dados | Concluído |
+| 4 | Carga dos dados na Dadosfera | Concluído |
+| 5 | Catalogação dos datasets | Concluído |
+| 6 | Criação do dicionário de dados | Concluído |
+| 7 | Execução de Data Quality | Concluído |
+| 8 | Feature engineering com IA | Concluído |
+| 9 | Modelagem dimensional | Concluído |
+| 10 | Criação das views finais | Concluído |
+| 11 | Construção do dashboard | Concluído |
+| 12 | Criação do pipeline | Concluído |
+| 13 | Desenvolvimento do Data App | Concluído |
+| 14 | Gravação da apresentação | Concluído |
 
 ---
 
